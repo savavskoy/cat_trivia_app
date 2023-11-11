@@ -8,7 +8,8 @@ class FactRemoteToFactMapper {
     return Fact(
       text: remote.text ?? '',
       createdDate: formatDate(remote.createdAt),
-      imageUrl: '${ApiConstants.catImageUrl}${DateTime.now().millisecondsSinceEpoch}',
+      imageUrl:
+          '${ApiConstants.catImageUrl}${DateTime.now().millisecondsSinceEpoch}',
     );
   }
 

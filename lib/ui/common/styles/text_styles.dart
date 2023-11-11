@@ -8,10 +8,10 @@ class AppTextStyles {
       const TextStyle(color: Colors.white, fontSize: 16);
 
   static TextStyle factTextListStyle =
-  const TextStyle(color: Colors.black87, fontSize: 18);
+      const TextStyle(color: Colors.black87, fontSize: 18);
 
   static TextStyle factDateTextListStyle =
-  const TextStyle(color: Colors.black26, fontSize: 14);
+      const TextStyle(color: Colors.black26, fontSize: 14);
 
   static TextStyle errorTextStyle =
       const TextStyle(color: Colors.black87, fontSize: 24);

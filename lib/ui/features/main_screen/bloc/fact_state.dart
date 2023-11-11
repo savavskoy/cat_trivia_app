@@ -1,25 +1,9 @@
 part of 'fact_bloc.dart';
 
-@immutable
-abstract class FactState {}
-
-class FactLoadingState extends FactState {
+@freezed
+class FactState with _$FactState {
+  const factory FactState.loading() = FactLoadingState;
+  const factory FactState.loaded({required Fact fact}) = FactLoadedState;
+  const factory FactState.failed({required ErrorResult error}) =
+      GetFactFailedState;
 }
-
-class FactLoadedState extends FactState {
-  FactLoadedState({
-    required this.fact,
-  });
-
-  final Fact fact;
-}
-
-class GetFactFailedState extends FactState {
-  GetFactFailedState({
-    required this.error,
-  });
-
-  final ErrorResult error;
-}
-
-

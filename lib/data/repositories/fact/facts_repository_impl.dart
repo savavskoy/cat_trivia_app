@@ -39,8 +39,9 @@ class FactsRepositoryImpl implements FactsRepository {
   }
 
   DataResult<List<Fact>> _processFactHistory(List<FactLocal> factsLocal) {
-    var facts =
-        factsLocal.map((fact) => FactLocalToFactMapper.fromLocal(fact)).toList();
+    var facts = factsLocal
+        .map((fact) => FactLocalToFactMapper.fromLocal(fact))
+        .toList();
     return SuccessResult(data: facts);
   }
 

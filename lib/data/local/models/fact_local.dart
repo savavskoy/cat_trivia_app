@@ -10,6 +10,5 @@ class FactLocal extends HiveObject {
   @HiveField(1)
   late String createdDate;
 
-  FactLocal(
-      {required this.text, required this.createdDate});
+  FactLocal({required this.text, required this.createdDate});
 }

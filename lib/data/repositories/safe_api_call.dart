@@ -12,11 +12,9 @@ Future<DataResult<T>> safeApiCall<T, U>(
       final response = e.response;
       if (response != null) {
         return ErrorResult(
-            code: response.statusCode,
-            message: response.statusMessage ?? "");
+            code: response.statusCode, message: response.statusMessage ?? "");
       }
     }
     return ErrorResult(code: null, message: 'Something went wrong');
   }
 }
-

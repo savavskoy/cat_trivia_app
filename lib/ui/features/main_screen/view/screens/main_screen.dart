@@ -1,6 +1,8 @@
 import 'package:cat_trivia_app/di/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../domain/models/fact.dart';
 import '../../../../common/styles/button_styles.dart';
 import '../../../../common/styles/text_styles.dart';
 import '../../../../common/widgets/error_explainer.dart';
@@ -51,16 +53,16 @@ class MainScreen extends StatelessWidget {
   }
 
   Widget _buildContent() {
-    _factBloc.add(GetRandomFactEvent());
+    _factBloc.add(const GetRandomFactEvent());
     return Center(
         child: BlocBuilder<FactBloc, FactState>(
       bloc: _factBloc,
       builder: (context, state) {
-        if (state is FactLoadedState) return _buildLoadedFact(state);
-        if (state is GetFactFailedState) {
-          return ErrorExplainer(error: state.error);
-        }
-        return const CircularProgressIndicator();
+        return state.when(
+          loading: () => const CircularProgressIndicator(),
+          loaded: (fact) => _buildLoadedFact(fact),
+          failed: (error) => ErrorExplainer(error: error),
+        );
       },
     ));
   }
@@ -125,8 +127,7 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildLoadedFact(FactLoadedState state) {
-    final fact = state.fact;
+  Widget _buildLoadedFact(Fact fact) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -147,7 +148,7 @@ class MainScreen extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: ElevatedButton(
-          onPressed: () => _factBloc.add(GetRandomFactEvent()),
+          onPressed: () => _factBloc.add(const GetRandomFactEvent()),
           style: mainButtonStyle,
           child: Text(
             "Another fact",

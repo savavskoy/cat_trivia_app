@@ -10,4 +10,3 @@ Future<DataResult<T>> safeLocalCall<T, U>(
     return ErrorResult(code: null, message: 'Something went wrong');
   }
 }
-

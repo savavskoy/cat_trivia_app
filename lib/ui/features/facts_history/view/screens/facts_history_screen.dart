@@ -34,21 +34,21 @@ class FactsHistoryScreen extends StatelessWidget {
   }
 
   Widget _buildScreen() {
-    _historyBloc.add(GetHistoryEvent());
+    _historyBloc.add(const GetHistoryEvent());
     return Center(
-        child: BlocBuilder<HistoryBloc, HistoryState>(
-      bloc: _historyBloc,
-      builder: (context, state) {
-        if (state is HistoryLoadedState) {
-          return _buildFactsHistoryState(state.facts);
-        }
-        if (state is GetHistoryFailedState) {
-          return ErrorExplainer(error: state.error);
-        }
-        return const CircularProgressIndicator();
-      },
-    ));
+      child: BlocBuilder<HistoryBloc, HistoryState>(
+        bloc: _historyBloc,
+        builder: (context, state) {
+          return state.when(
+            loading: () => const CircularProgressIndicator(),
+            loaded: (facts) => _buildFactsHistoryState(facts),
+            failed: (error) => ErrorExplainer(error: error),
+          );
+        },
+      ),
+    );
   }
+
 
   Widget _buildFactsHistoryState(List<Fact> facts) {
     return ListView.separated(

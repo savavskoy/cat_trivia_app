@@ -1,6 +1,6 @@
 part of 'fact_bloc.dart';
 
-@immutable
-abstract class FactEvent{}
-
-class GetRandomFactEvent extends FactEvent {}
+@freezed
+class FactEvent with _$FactEvent {
+  const factory FactEvent.getRandom() = GetRandomFactEvent;
+}
